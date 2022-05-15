@@ -1,6 +1,7 @@
 package com.brandjunhoe.shippingservice.consumer
 
-import com.brandjunhoe.shippingservice.consumer.event.ShippingSaveEvent
+import com.brandjunhoe.shippingservice.consumer.event.ShippingSaveDTO
+import com.brandjunhoe.shippingservice.shipping.application.ShippingService
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.springframework.context.ApplicationEventPublisher
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class ShippingSaveConsumer(
-    private val eventPublisher: ApplicationEventPublisher,
+    private val shippingService: ShippingService,
     private val objectMapper: ObjectMapper
 ) : AcknowledgingMessageListener<String, String> {
 
@@ -23,8 +24,8 @@ class ShippingSaveConsumer(
     )
     override fun onMessage(data: ConsumerRecord<String, String>, acknowledgment: Acknowledgment?) {
 
-        val data = objectMapper.readValue(data.value(), ShippingSaveEvent::class.java)
-        eventPublisher.publishEvent(data)
+        val data = objectMapper.readValue(data.value(), ShippingSaveDTO::class.java)
+        shippingService.save(data)
         acknowledgment?.acknowledge()
 
     }

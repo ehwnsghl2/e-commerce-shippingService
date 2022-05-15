@@ -4,7 +4,7 @@ import com.brandjunhoe.shippingservice.shipping.Address
 import com.brandjunhoe.shippingservice.shipping.domain.Shipping
 import com.brandjunhoe.shippingservice.shipping.domain.ShippingCode
 
-class ShippingSaveEvent(
+class ShippingSaveDTO(
 
     val orderCode: String,
 
