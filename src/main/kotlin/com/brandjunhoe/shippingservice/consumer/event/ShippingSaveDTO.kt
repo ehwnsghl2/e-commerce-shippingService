@@ -16,10 +16,5 @@ class ShippingSaveDTO(
 
 ) {
     fun toEntity(): Shipping =
-        Shipping(
-            ShippingCode("code"),
-            orderCode,
-            address = Address(postCode, address, addressDetail)
-        )
-
+        Shipping(ShippingCode("code"), orderCode, Address(postCode, address, addressDetail))
 }

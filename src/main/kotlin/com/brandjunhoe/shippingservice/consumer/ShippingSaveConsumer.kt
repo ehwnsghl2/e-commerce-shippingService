@@ -23,12 +23,11 @@ class ShippingSaveConsumer(
         groupId = "\${spring.kafka.consumer.group-id}"
     )
     override fun onMessage(data: ConsumerRecord<String, String>, acknowledgment: Acknowledgment?) {
-
         val data = objectMapper.readValue(data.value(), ShippingSaveDTO::class.java)
         shippingService.save(data)
         acknowledgment?.acknowledge()
-
     }
 
-
 }
+
+// {"orderCode" : "orderCode", "postCode" : "06555", "address" : "address", "addressDetail" : "addressDetail"}

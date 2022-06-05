@@ -10,8 +10,8 @@ class ShippingService(private val shippingRepository: ShippingRepository) {
 
 
     @EventListener
-    fun save(DTO: ShippingSaveDTO) {
-        shippingRepository.save(DTO.toEntity())
+    fun save(request: ShippingSaveDTO) {
+        shippingRepository.save(request.toEntity())
     }
 
 }

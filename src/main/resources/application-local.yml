@@ -1,14 +1,7 @@
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-      healthcheck:
-        enabled: true
-    registry-fetch-interval-seconds: 5 # 서비스 목록 5초마다 캐싱(default : 30초)
-    disable-delta: true # 캐싱할 때 변경된 부분만 업데이트(default : false)
-    # 이를 방지하는 한 가지 방법은 이 속성을 비활성화 하는 것임
-    refresh:
-      enable: false
-
+spring:
+  cloud:
+    config:
+      profile: local
+      fail-fast: true
+  config:
+    import: optional:configserver:http://localhost:8888
